@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://bullet.png" type="Texture" id=1]
+[ext_resource path="res://bulletenemy.gd" type="Script" id=2]
+
+[sub_resource type="RayShape2D" id=1]
+length = 6.48952
+
+[node name="bullet" type="Sprite"]
+modulate = Color( 0.407843, 0.0666667, 0.0666667, 1 )
+position = Vector2( -7.5, -2 )
+scale = Vector2( 0.335444, 0.315069 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 6.94794, -3.08299 )
+scale = Vector2( 11.57, 11.1464 )
+
+[node name="Area2D" type="Area2D" parent="VisibilityNotifier2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VisibilityNotifier2D/Area2D"]
+modulate = Color( 0.533333, 0.160784, 0.160784, 1 )
+position = Vector2( 2.56273, 0.25766 )
+rotation = -1.5708
+shape = SubResource( 1 )
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="body_entered" from="VisibilityNotifier2D/Area2D" to="." method="_on_Area2D_body_entered"]
